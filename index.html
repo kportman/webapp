@@ -1,106 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-
-	<title>WebApp</title>
-
-	<link rel="stylesheet" href="css/main.css">
+    <meta charset="utf-8">
+    <title>Web app</title>
+    <link rel="stylesheet" type="text/css" href="fonts/style.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-	<header>
-		<div class="layout-wrap">
-			<a href="#"><img src="img/logo-netcraft.svg" alt="netcraft"></a>
+<header>
+    <div class="heading">
+        <a href="http://www.netcraft.co.il" tabindex="2"><img src="img/logo-netcraft.svg" alt="Netcraft Logo"></a>
+        <input tabindex="1" class="find" placeholder="Find" type="text" >
+    </div>
+</header>
 
-			<form class="search-box">
-				<input type="search" name="q" placeholder="search">
-			</form>
-		</div>
-	</header>
+<section class="body-heading">
+    <div class="notifications">
+    </div>  
+        <nav>
+            <div class="nav-section" tabindex="3">
+                <div class="menu">
+                    <div class="menu-caption">
+                    </div>
+                        <ul class="action-list">
+                        </ul>
+                </div>
+            </div>
+            <div class="nav-section" tabindex="8">
+                <div class="menu">
+                    <div class="menu-caption">
+                    </div>
+                    <ul class="action-list">
+                    </ul>
+                </div>
+            </div>
+            <div class="nav-section" tabindex="13">
+                <div class="menu">
+                    <div class="menu-caption">
+                    </div>
+                    <ul class="action-list">
+                    </ul>
+                </div>
+            </div>
+        </nav>  
+    <section class="tabs">
+        <ul>
+            <li><a href="#qr" tabindex="16">Quick Reports</a></li>
+            <li><a href="#my-folders" tabindex="17">My Folders</a></li>
+            <li><a href="#my-team-folders" tabindex="18">My Team Folders</a></li>
+            <li><a href="#public-folders" tabindex="19">Public Folders</a></li>
+        </ul>
+        <div id="qr" class="qr">
+            <div class="icons-bar">
+                <ul class="sel">
+                </ul>
+                <div class="set-box">
+                    <div class="settings-icon">
+                        <img src="img/icons/settings.png" alt="got to link in new tab">
+                    </div>
+                </div>
+                <a target="_blank" href="" class="expand-icon">
+                    <img src="img/icons/expand.png" alt="got to link in new tab">
+                </a>
+            </div>
+            <div class="settings">
+                <form action="">
+                    <ul>
+                        <li>
+                            <label class="moveLeft">Quick report 1</label>
+                            <div>
+                                <input class="name" type="text" id="name1" placeholder="Write the name of the link">
+                                <input class="url moveLeft" type="url" id="url1" placeholder="Write your link">
+                            </div>
+                        </li>
+                        <li>
+                            <label class="moveLeft">Quick report 2</label>
+                            <div>
+                                <input class="name" type="text" id="name2" placeholder="Write the name of the link">
+                                <input class="url moveLeft" type="url" id="url2" placeholder="Write your link">
+                            </div>
+                        </li>
+                        <li>
+                                <label class="moveLeft">Quick report 3</label>
+                            <div>
+                                <input class="name" type="text" id="name3" placeholder="Write the name of the link">
+                                <input class="url moveLeft" type="url" id="url3" placeholder="Write your link">
+                            </div></li></ul>
+                    <div class="reportsAndFolder">
+                        <input type="button" class="remove-all-links" value="Cancel">
+                        <input type="submit" class="update-new-changes" value="Save">
+                    </div></form></div><iframe src="" class="window-link"></iframe>
+        </div>
 
-	<section class="page-body layout-wrap">
-		<div class="notifications"></div>
+        <div id="my-folders">
+                <a target="_blank" href="http://addyosmani.com/" class="expand-icon">
+                    <img src="img/icons/expand.png" alt="got to link in new tab">
+                </a>
+            <iframe src="http://addyosmani.com/" class="window-link"></iframe>
+        </div>
 
-		<nav>
-			<div class="nav-section">
-				<p>Select Reporting Platform</p>
+        <div id="my-team-folders" class="my-team-folders">
+            <div class="icons-bar">
+                <ul class="sel">
+                </ul>
+                <div class="set-box">
+                    <div class="settings-icon">
+                        <img src="img/icons/settings.png" alt="got to link in new tab">
+                    </div>
+                </div>
+                <a target="_blank" href="" class="expand-icon">
+                    <img src="img/icons/expand.png" alt="got to link in new tab">
+                </a>
+            </div>
 
-				<div class="menu">
-					<div class="menu-caption">
-						<p>Choose QS report</p>
-					</div>
-
-					<ul class="action-list">
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="nav-section">
-				<p>Select Dashboard</p>
-
-				<div class="menu">
-					<div class="menu-caption">
-						<p>Choose dashboard</p>
-					</div>
-
-					<ul class="action-list">
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-					</ul>
-				</div>
-			</div>
-
-			<div class="nav-section">
-				<p>Help &amp; Tutorials</p>
-
-				<div class="menu">
-					<div class="menu-caption">
-						<p>Choose guide</p>
-					</div>
-
-					<ul class="action-list">
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-						<li><a href="#">link</a></li>
-					</ul>
-				</div>
-			</div>
-		</nav>
-
-		<section class="tabs">
-			<ul>
-				<li><a href="#quick-reports">Quick Reports</a></li>
-				<li><a href="#my-folders">My Folders</a></li>
-				<li><a href="#my-team-folders">My Team Folders</a></li>
-				<li><a href="#public-folders">Public Folders</a></li>
-			</ul>
-
-			<div id="quick-reports">
-			</div>
-
-			<div id="my-folders">
-			</div>
-
-			<div id="my-team-folders">
-			</div>
-
-			<div id="public-folders">
-			</div>
-		</section>
-	</section>
-
-	<script src="js/main.js"></script>
+            <div class="settings">
+                <form action="">
+                    <ul>
+                        <li>
+                            <label class="moveFolderLeft">My team folder 1</label>
+                            <div>
+                                <input class="name" type="text" id="teamname1" placeholder="Write the name of the link">
+                                <input class="url moveLeft" type="url" id="teamurl1" placeholder="Write your link">
+                            </div>
+                        </li>
+                        <li>
+                            <label class="moveFolderLeft">My team folder 2</label>
+                            <div>
+                                <input class="name" type="text" id="teamname2" placeholder="Write the name of the link">
+                                <input class="url moveLeft" type="url" id="teamurl2" placeholder="Write your link">
+                            </div>
+                        </li>
+                        <li>
+                            <label class="moveFolderLeft">My team folder 3</label>
+                            <div>
+                                <input class="name" type="text" id="teamname3" placeholder="Write the name of the link">
+                                <input class="url moveLeft" type="url" id="teamurl3" placeholder="Write your link">
+                            </div></li></ul>
+							<div class="reportsAndFolder">
+                        <input type="button" class="remove-all-links" value="Cancel">
+                        <input type="submit" class="update-new-changes" value="Save">
+                    </div></form></div><iframe src="" class="window-link"></iframe></div>
+        <div id="public-folders">
+                <a target="_blank" href="http://www.paulirish.com/" class="expand-icon">
+                    <img src="img/icons/expand.png" alt="got to link in new tab">
+                </a>
+            <iframe src="http://www.paulirish.com/" class="window-link"></iframe>
+        </div>
+    </section>
+</section>
+<script src="js/main.js"></script>
 </body>
 </html>

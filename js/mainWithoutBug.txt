@@ -334,6 +334,7 @@ var procData = function (data)
 }
 function start() 
 {
+	var done;
     getCon("data/config.json", {done: procData});
     getCon("fonts/selection.json", {done: tabUp});
 
