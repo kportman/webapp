@@ -259,18 +259,19 @@ var tabUp = function (pics)
         document.querySelector("a[href=\"" + remem + "\"]").parentNode.className = "active-tab";
         document.querySelector(remem).style.display = "block";
     }
-    window.addEventListener("hashchange", function (e) 
-    {
-        for (var i = 0; i < document.querySelectorAll(".tabs > div").length; i++) 
-        {
-        	document.querySelectorAll(".tabs > div")[i].style.display = "none";
-        }
-        document.querySelector(e.newURL.substring(e.newURL.indexOf("#"))).style.display = "block";
-        document.querySelector(".active-tab").className = "";
-        document.querySelector("a[href=\"" + e.newURL.substring(e.newURL.indexOf("#")) + "\"]").parentNode.className = "active-tab";
-    }, false);
+    window.addEventListener("hashchange", hChange, false);
 
 };
+var hChange = function (e) 
+{
+    for (var i = 0; i < document.querySelectorAll(".tabs > div").length; i++) 
+    {
+    	document.querySelectorAll(".tabs > div")[i].style.display = "none";
+    }
+    document.querySelector(e.newURL.substring(e.newURL.indexOf("#"))).style.display = "block";
+    document.querySelector(".active-tab").className = "";
+    document.querySelector("a[href=\"" + e.newURL.substring(e.newURL.indexOf("#")) + "\"]").parentNode.className = "active-tab";
+}
 
 var fill = function(info, tabName)
 {
@@ -336,7 +337,10 @@ function start()
 {
     getCon("data/config.json", {done: procData});
     getCon("fonts/selection.json", {done: tabUp});
-
+    
+    if (localStorage.webApp == "" || localStorage.webApp == null || localStorage.webApp == undefined) {
+    	window.location = window.location.href.split('#')[0] + "#qr";
+    }
     var sButtons = document.querySelectorAll(".settings-icon");
     sButtons[0].addEventListener("click", function(){setSettings(this,TagNames.qr);});
     sButtons[1].addEventListener("click", function(){setSettings(this,TagNames.mtf);});
@@ -348,6 +352,9 @@ function start()
     sButtons = document.querySelectorAll(TagNames.updateChanges);
     sButtons[0].addEventListener("click", function(){pushSave(this,TagNames.qr);});
     sButtons[1].addEventListener("click", function(){pushSave(this,TagNames.mtf);});
+    
+    document.querySelectorAll(TagNames.updateChanges)[1].click();
+    document.querySelectorAll(".settings-icon")[1].click();
     var info = document.querySelectorAll(".name , .url");
     for (i = 0; i < info.length; ++i) 
     {
