@@ -28,7 +28,9 @@ TagNames =
     iconSet: ".settings-icon",
     tabC: ".tabs",
     tabAct: "active-tab",
-    search: ".find"
+    search: ".find",
+    liOpen: "<li>",
+    liClose: "</li>"
 }
 
 var getQA = function (qA) 
@@ -56,7 +58,7 @@ var getQA = function (qA)
         	document.querySelectorAll(TagNames.mnu)[i].innerHTML = "<p>" + qA[i].actionsLabel + "</p>";
         }
       
-        var start = "<li>" + "<a href=\"";
+        var start = TagNames.liOpen + "<a href=\"";
         var tabIndex = "\" tabindex=\"";
         var end = "\"></a></li>";
         for (i = 0; i < qA.length; i++) 
@@ -162,12 +164,12 @@ var refresh = function (tabName)
         {
             if (i == 0) 
             {
-                document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + "<li>" + info[i].value + "</li>";
+                document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + TagNames.liOpen + info[i].value + "</li>";
                 document.querySelectorAll(enc + " li")[0].title = info[i + 1].value;
                 document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + TagNames.windowLink).src = info[i + 1].value;
                 document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + " " + TagNames.wideI).href = info[i + 1].value;
             }
-            document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + "<li>" + info[i].value + "</li>";
+            document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + TagNames.liOpen + info[i].value + "</li>";
             document.querySelectorAll(enc + " li")[i / 2 + 1].title = info[i + 1].value;
             indicator = false;
         }
@@ -219,10 +221,10 @@ var pushSave = function (currentTag, parentClass)
             {
                 if (i == 0) 
                 {
-                    document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + "<li>" + info[i].value + "</li>";
+                    document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + TagNames.liOpen + info[i].value + "</li>";
                     document.querySelectorAll(enc + " li")[0].title = info[i + 1].value;
                 }
-                document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + "<li>" + info[i].value + "</li>";
+                document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + TagNames.liOpen + info[i].value + "</li>";
                 document.querySelectorAll(enc + " li")[i / 2 + 1].title = info[i + 1].value;
                 indicator = false;
             }
