@@ -352,9 +352,12 @@ function start()
     sButtons = document.querySelectorAll(TagNames.updateChanges);
     sButtons[0].addEventListener("click", function(){pushSave(this,TagNames.qr);});
     sButtons[1].addEventListener("click", function(){pushSave(this,TagNames.mtf);});
+    if (localStorage.webApp == "" || localStorage.webApp == null || localStorage.webApp == undefined) 
+    {
+    	document.querySelectorAll(TagNames.updateChanges)[1].click();
+        document.querySelectorAll(".settings-icon")[1].click();
+    }
     
-    document.querySelectorAll(TagNames.updateChanges)[1].click();
-    document.querySelectorAll(".settings-icon")[1].click();
     var info = document.querySelectorAll(".name , .url");
     for (i = 0; i < info.length; ++i) 
     {
