@@ -20,7 +20,15 @@ TagNames =
     notifs: ".notifications",
     navig: ".nav-section",
     act: ".action-list",
-    mnu: ".menu-caption"
+    mnu: ".menu-caption",
+    name: ".name",
+    url: ".url",
+    wideI: ".expand-icon",
+    defins: ".settings",
+    iconSet: ".settings-icon",
+    tabC: ".tabs",
+    tabAct: "active-tab",
+    search: ".find"
 }
 
 var getQA = function (qA) 
@@ -143,7 +151,7 @@ var getCon = function (url, options)
 
 var refresh = function (tabName) 
 {
-    info = document.querySelectorAll("." + tabName + " .name" + ", ." + tabName + " .url");
+    info = document.querySelectorAll("." + tabName + " " + TagNames.name + ", ." + tabName + " " + TagNames.url);
     fill(info,tabName);
     var enc = "." + tabName + " " + TagNames.sel;
     var indicator = true;
@@ -157,7 +165,7 @@ var refresh = function (tabName)
                 document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + "<li>" + info[i].value + "</li>";
                 document.querySelectorAll(enc + " li")[0].title = info[i + 1].value;
                 document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + TagNames.windowLink).src = info[i + 1].value;
-                document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + " .expand-icon").href = info[i + 1].value;
+                document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + " " + TagNames.wideI).href = info[i + 1].value;
             }
             document.querySelector(enc).innerHTML = document.querySelector(enc).innerHTML + "<li>" + info[i].value + "</li>";
             document.querySelectorAll(enc + " li")[i / 2 + 1].title = info[i + 1].value;
@@ -169,7 +177,7 @@ var refresh = function (tabName)
     {
         document.querySelector(enc).style.display = "none";
         document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + TagNames.windowLink).src = "";
-        document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + " .expand-icon").href = "";
+        document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + " " + TagNames.wideI).href = "";
     }
     else 
     {
@@ -179,7 +187,7 @@ var refresh = function (tabName)
         {
             listItems[i].addEventListener("click", function() {openIframe(this,tabName);});
         }
-        var settingsDiv = document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + " .settings");
+        var settingsDiv = document.querySelector("." + document.querySelector(enc).parentNode.parentNode.className + " " + TagNames.defins);
         setStyle(settingsDiv);
         document.querySelector("." + tabName + " " + TagNames.sett).style.backgroundColor = "transparent";
         listItems[0].click();
@@ -188,7 +196,7 @@ var refresh = function (tabName)
 
 var pushSave = function (currentTag, parentClass) 
 {
-    var info = document.querySelectorAll("." + parentClass + " .name ," + "." + parentClass + " .url");
+    var info = document.querySelectorAll("." + parentClass + " " + TagNames.name + " ," + "." + parentClass + " " + TagNames.url);
     var ok = true;
     ok = helpF(info);
     if (ok == true && learnRegExp(currentTag))  
@@ -224,7 +232,7 @@ var pushSave = function (currentTag, parentClass)
         {
             document.querySelector(enc).style.display = "none";
             document.querySelector("." + parentClass + TagNames.windowLink).src = "";
-            document.querySelector("." + parentClass + " .expand-icon").href = "";
+            document.querySelector("." + parentClass + " " + TagNames.wideI).href = "";
         }
         else 
         {
@@ -234,29 +242,29 @@ var pushSave = function (currentTag, parentClass)
                 document.querySelectorAll(enc + " li")[i].addEventListener("click", function() {openIframe(this,parentClass);});
             }
         }
-        document.querySelector("." + parentClass + " .settings-icon").click();
+        document.querySelector("." + parentClass + " " + TagNames.iconSet).click();
         document.querySelectorAll(enc + " li")[0].click();
     }
 };
 
 var tabUp = function (pics) 
 {
-    for (var i = 0; i < document.querySelectorAll(".tabs >ul li a").length; i++) 
+    for (var i = 0; i < document.querySelectorAll(TagNames.tabC + " >ul li a").length; i++) 
     {
     	if (pics !== undefined && pics.preferences !== undefined)
     	{
-    		document.querySelectorAll(".tabs >ul li a")[i].innerHTML = "<i class=\"" + pics.preferences.fontPref.prefix + pics.icons[i].icon.tags[0] + "\"></i>" + document.querySelectorAll(".tabs >ul li a")[i].innerHTML;
+    		document.querySelectorAll(TagNames.tabC + " >ul li a")[i].innerHTML = "<i class=\"" + pics.preferences.fontPref.prefix + pics.icons[i].icon.tags[0] + "\"></i>" + document.querySelectorAll(TagNames.tabC + " >ul li a")[i].innerHTML;
     	}
     }
     if (window.location.href.indexOf("#") == -1) 
     {
-        document.querySelector(".tabs>ul>li").className += "active-tab";
-        document.querySelector(".tabs>div").style.display = "block";
+        document.querySelector(TagNames.tabC + ">ul>li").className += TagNames.tabAct;
+        document.querySelector(TagNames.tabC + ">div").style.display = "block";
     }
     else
     {
         var remem = window.location.href.substring(window.location.href.indexOf("#"));
-        document.querySelector("a[href=\"" + remem + "\"]").parentNode.className = "active-tab";
+        document.querySelector("a[href=\"" + remem + "\"]").parentNode.className = TagNames.tabAct;
         document.querySelector(remem).style.display = "block";
     }
     window.addEventListener("hashchange", hChange, false);
@@ -264,13 +272,13 @@ var tabUp = function (pics)
 };
 var hChange = function (e) 
 {
-    for (var i = 0; i < document.querySelectorAll(".tabs > div").length; i++) 
+    for (var i = 0; i < document.querySelectorAll(TagNames.tabC + " > div").length; i++) 
     {
-    	document.querySelectorAll(".tabs > div")[i].style.display = "none";
+    	document.querySelectorAll(TagNames.tabC + " > div")[i].style.display = "none";
     }
     document.querySelector(e.newURL.substring(e.newURL.indexOf("#"))).style.display = "block";
-    document.querySelector(".active-tab").className = "";
-    document.querySelector("a[href=\"" + e.newURL.substring(e.newURL.indexOf("#")) + "\"]").parentNode.className = "active-tab";
+    document.querySelector("." + TagNames.tabAct).className = "";
+    document.querySelector("a[href=\"" + e.newURL.substring(e.newURL.indexOf("#")) + "\"]").parentNode.className = TagNames.tabAct;
 }
 
 var fill = function(info, tabName)
@@ -293,12 +301,12 @@ var fill = function(info, tabName)
 
 var setSettings = function(currentTag, parentClass) 
 {
-        var settingsDiv = document.querySelector("." + parentClass + "> .settings");
+        var settingsDiv = document.querySelector("." + parentClass + "> " + TagNames.defins);
         if (settingsDiv.style.display == "none") {
             settingsDiv.style.display = "block";
             settingsDiv.style.height = "45%";
             currentTag.parentNode.style.backgroundColor = "white";
-            document.querySelector("." + parentClass + " .name").focus();
+            document.querySelector("." + parentClass + " " + TagNames.name).focus();
         }
         else
         {
@@ -308,11 +316,11 @@ var setSettings = function(currentTag, parentClass)
 };
 var setCancel = function (currentTag, parentClass) 
 {
-    for (var i = 0; i < document.querySelectorAll("." + parentClass + " .url ," + "." + parentClass + " .name").length; ++i) 
+    for (var i = 0; i < document.querySelectorAll("." + parentClass + " " + TagNames.url + " ," + "." + parentClass + " " + TagNames.name).length; ++i) 
     {
-        document.querySelectorAll("." + parentClass + " .url ," + "." + parentClass + " .name")[i].value = "";
+        document.querySelectorAll("." + parentClass + " " + TagNames.url + " ," + "." + parentClass + " " + TagNames.name)[i].value = "";
     }
-    var settingsDiv = document.querySelector("." + parentClass + " .settings");
+    var settingsDiv = document.querySelector("." + parentClass + " " + TagNames.defins);
     setStyle(settingsDiv);
     document.querySelector("." + parentClass + " " + TagNames.sett).style.backgroundColor = "transparent";
     refresh(parentClass);
@@ -341,7 +349,7 @@ function start()
     if (localStorage.webApp == "" || localStorage.webApp == null || localStorage.webApp == undefined) {
     	window.location = window.location.href.split('#')[0] + "#qr";
     }
-    var sButtons = document.querySelectorAll(".settings-icon");
+    var sButtons = document.querySelectorAll(TagNames.iconSet);
     sButtons[0].addEventListener("click", function(){setSettings(this,TagNames.qr);});
     sButtons[1].addEventListener("click", function(){setSettings(this,TagNames.mtf);});
 
@@ -355,10 +363,10 @@ function start()
     if (localStorage.webApp == "" || localStorage.webApp == null || localStorage.webApp == undefined) 
     {
     	document.querySelectorAll(TagNames.updateChanges)[1].click();
-        document.querySelectorAll(".settings-icon")[1].click();
+        document.querySelectorAll(TagNames.iconSet)[1].click();
     }
     
-    var info = document.querySelectorAll(".name , .url");
+    var info = document.querySelectorAll(TagNames.name + " , " + TagNames.url);
     for (i = 0; i < info.length; ++i) 
     {
         info[i].addEventListener("keypress", function (myEvent) 
@@ -375,7 +383,7 @@ function start()
             }
         });
     }
-    document.querySelector(".find").addEventListener("keypress", function (myEvent) 
+    document.querySelector(TagNames.search).addEventListener("keypress", function (myEvent) 
     {
         if (myEvent.which == StatusNumbers.EnterButtonPushed) 
         {
@@ -384,7 +392,7 @@ function start()
             {
                 if (dd[i].innerHTML == this.value) 
                 {
-                    document.querySelector(".tabs ul li a[href=\"#" + dd[i].parentNode.parentNode.parentNode.className +"\"]" ).click();
+                    document.querySelector(TagNames.tabC + " ul li a[href=\"#" + dd[i].parentNode.parentNode.parentNode.className +"\"]" ).click();
                     dd[i].click();
                     i = dd.length + 1;
                 }
@@ -400,7 +408,7 @@ function start()
 var openIframe = function (thisTag,name) 
 {
     document.querySelector("." + name + TagNames.windowLink).src = thisTag.title;
-    document.querySelector("." + name + " .expand-icon").href = thisTag.title;
+    document.querySelector("." + name + " " + TagNames.wideI).href = thisTag.title;
     thisTag.parentNode.parentNode.querySelector("li").title = thisTag.title;
     thisTag.parentNode.parentNode.querySelector("li").innerHTML = thisTag.innerHTML;
     thisTag.parentNode.parentNode.querySelector("li").addEventListener("click", function() {openIframe(thisTag,name);});
