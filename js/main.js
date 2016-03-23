@@ -205,12 +205,12 @@ var pushSave = function (currentTag, parentClass)
     {
     	var indicator = true;
         var enc = parentClass + ":.+?;";
-        localStorage.webApp = localStorage.webApp.replace(new RegExp(enc, "g"), "");
+        localStorage.myLocalData = localStorage.myLocalData.replace(new RegExp(enc, "g"), "");
         for (var i = 0; i < info.length; i++) 
         {
             if (info[i].value != null && info[i].value != "") 
             {
-                localStorage.webApp = localStorage.webApp + parentClass + ":" + info[i].id + "=" + info[i].value + ";";
+                localStorage.myLocalData = localStorage.myLocalData + parentClass + ":" + info[i].id + "=" + info[i].value + ";";
             }
         }
         enc = "." + parentClass + " " + TagNames.sel;
@@ -288,13 +288,13 @@ var fill = function(info, tabName)
 	 for (i = 0; i < info.length; i++) 
      {
 	        var str = tabName + ":" + info[i].id + "=";
-	        if (localStorage.webApp.indexOf(str) != -1) 
+	        if (localStorage.myLocalData.indexOf(str) != -1) 
 	        {
-	            var i = localStorage.webApp.indexOf(str) + str.length;
-	            var j = localStorage.webApp.indexOf(";", i);
+	            var i = localStorage.myLocalData.indexOf(str) + str.length;
+	            var j = localStorage.myLocalData.indexOf(";", i);
 	            if(info !== undefined && info[i] !== undefined)
 	            {
-	            	info[i].value = localStorage.webApp.substring(i, j);
+	            	info[i].value = localStorage.myLocalData.substring(i, j);
 	            }
 	        }
 	            
@@ -336,11 +336,11 @@ var procData = function (data)
     if (data !== undefined && data.quickActions !== undefined) {
     	getQA(data.quickActions);
     }
-    if (localStorage.webApp != "" && localStorage.webApp != null) {
+    if (localStorage.myLocalData != "" && localStorage.myLocalData != null) {
         refresh(TagNames.qr);
         refresh(TagNames.mtf);
     } else {
-        localStorage.webApp = "";
+        localStorage.myLocalData = "";
     }
 }
 function start() 
@@ -348,7 +348,7 @@ function start()
     getCon("data/config.json", {done: procData});
     getCon("fonts/selection.json", {done: tabUp});
     
-    if (localStorage.webApp == "" || localStorage.webApp == null || localStorage.webApp == undefined) {
+    if (localStorage.myLocalData == "" || localStorage.myLocalData == null || localStorage.myLocalData == undefined) {
     	window.location = window.location.href.split('#')[0] + "#qr";
     }
     var sButtons = document.querySelectorAll(TagNames.iconSet);
@@ -362,7 +362,7 @@ function start()
     sButtons = document.querySelectorAll(TagNames.updateChanges);
     sButtons[0].addEventListener("click", function(){pushSave(this,TagNames.qr);});
     sButtons[1].addEventListener("click", function(){pushSave(this,TagNames.mtf);});
-    if (localStorage.webApp == "" || localStorage.webApp == null || localStorage.webApp == undefined) 
+    if (localStorage.myLocalData == "" || localStorage.myLocalData == null || localStorage.myLocalData == undefined) 
     {
     	document.querySelectorAll(TagNames.updateChanges)[1].click();
         document.querySelectorAll(TagNames.iconSet)[1].click();
